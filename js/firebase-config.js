@@ -44,3 +44,10 @@ window.FirebaseDB = {
     getStorage: () => storage,
     initialize: initializeFirebase
 };
+
+// Auto-initialize Firebase when script loads
+document.addEventListener('DOMContentLoaded', function () {
+    if (!db) {
+        initializeFirebase();
+    }
+});
