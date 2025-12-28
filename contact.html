@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Meta Tags -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact Celestral - Get in touch with us for questions, feedback, or support.">
+  <meta name="keywords" content="contact, support, feedback, celestral">
+  <meta name="author" content="Celestral">
+  
+  <!-- Title -->
+  <title>Contact Us - Celestral</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/contact.css">
+  <link rel="stylesheet" href="css/contact-page.css">
+</head>
+<body>
+  
+  <!-- Skip to main content for accessibility -->
+  <a href="#main-content" class="skip-to-main">Skip to main content</a>
+  
+  <!-- ========================================
+       NAVIGATION
+       ======================================== -->
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="navbar__container">
+      <!-- Logo -->
+      <a href="index.html" class="navbar__logo" aria-label="Celestral Home">
+        <span class="navbar__logo-text">Cele</span><span class="navbar__logo-accent">stral</span>
+      </a>
+      
+      <!-- Navigation Menu -->
+      <ul class="navbar__menu" id="navbarMenu">
+        <li><a href="index.html" class="navbar__link">Home</a></li>
+        <li><a href="our-mission.html" class="navbar__link">Our Mission</a></li>
+        <li><a href="contact.html" class="navbar__link active">Contact Us</a></li>
+        <li><a href="index.html#start" class="btn btn-primary btn-small">Start Journey</a></li>
+      </ul>
+      
+      <!-- Mobile Menu Toggle -->
+      <button class="navbar__toggle" id="navbarToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+      </button>
+    </div>
+  </nav>
+  
+  <!-- ========================================
+       MAIN CONTENT
+       ======================================== -->
+  <main id="main-content">
+    
+    <!-- Hero Section -->
+    <section class="contact-hero">
+      <div class="container">
+        <h1 class="contact-hero__title animate-on-scroll">
+          Contact <span class="text-primary">Us</span>
+        </h1>
+        <p class="contact-hero__subtitle animate-on-scroll">
+          Have questions or feedback? We'd love to hear from you.
+        </p>
+      </div>
+    </section>
+    
+    <!-- Contact Form Section -->
+    <section class="contact-form-section">
+      <div class="container">
+        <div class="contact-wrapper-page animate-on-scroll">
+          <form class="contact-form-page" id="contactForm" onsubmit="return sendEmail(event)">
+            <div class="form-group">
+              <label for="contact-name" class="form-label">Name</label>
+              <input 
+                type="text" 
+                id="contact-name" 
+                name="name" 
+                class="form-input" 
+                placeholder="Your full name"
+                required
+              >
+            </div>
+            
+            <div class="form-group">
+              <label for="contact-email" class="form-label">Email</label>
+              <input 
+                type="email" 
+                id="contact-email" 
+                name="email" 
+                class="form-input" 
+                placeholder="your.email@example.com"
+                required
+              >
+            </div>
+            
+            <div class="form-group">
+              <label for="contact-title" class="form-label">Title</label>
+              <input 
+                type="text" 
+                id="contact-title" 
+                name="title" 
+                class="form-input" 
+                placeholder="Subject of your message"
+                required
+              >
+            </div>
+            
+            <div class="form-group">
+              <label for="contact-description" class="form-label">Description</label>
+              <textarea 
+                id="contact-description" 
+                name="description" 
+                class="form-textarea" 
+                placeholder="Tell us more about your inquiry..."
+                rows="8"
+                required
+              ></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-large">
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+    
+  </main>
+  
+  <!-- ========================================
+       FOOTER
+       ======================================== -->
+  <footer class="footer">
+    <div class="footer__container">
+      <div class="footer__grid">
+        <!-- Brand Section -->
+        <div class="footer__brand">
+          <div class="footer__logo">Celestral</div>
+          <p class="footer__tagline">Love is a mystery</p>
+        </div>
+        
+        <!-- Quick Links -->
+        <div class="footer__links">
+          <h4 class="footer__heading">Quick Links</h4>
+          <ul class="footer__list">
+            <li><a href="index.html" class="footer__link">Home</a></li>
+            <li><a href="our-mission.html" class="footer__link">Our Mission</a></li>
+            <li><a href="contact.html" class="footer__link">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Footer Bottom -->
+      <div class="footer__bottom">
+        <p class="footer__copyright">
+          © 2025 Celestral. All rights reserved.
+        </p>
+        <ul class="footer__legal">
+          <li><a href="#privacy" class="footer__legal-link">Privacy</a></li>
+          <li><a href="#terms" class="footer__legal-link">Terms</a></li>
+          <li><a href="#cookies" class="footer__legal-link">Cookies</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- JavaScript Files -->
+  <script>
+    // Contact form email handler
+    function sendEmail(event) {
+      event.preventDefault();
+      
+      const name = document.getElementById('contact-name').value;
+      const email = document.getElementById('contact-email').value;
+      const title = document.getElementById('contact-title').value;
+      const description = document.getElementById('contact-description').value;
+      
+      const subject = encodeURIComponent(`Celestral Contact: ${title}`);
+      const body = encodeURIComponent(
+        `Name: ${name}\n` +
+        `Email: ${email}\n` +
+        `Title: ${title}\n\n` +
+        `Message:\n${description}`
+      );
+      
+      window.location.href = `mailto:sidaeivarc@gmail.com?subject=${subject}&body=${body}`;
+      
+      return false;
+    }
+  </script>
+  <script src="js/main.js" type="module"></script>
+  
+</body>
+</html>

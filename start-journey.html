@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Meta Tags -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Start Your Journey - Celestral Assessment">
+  <meta name="keywords" content="blind dating, assessment, profile">
+  <meta name="author" content="Celestral">
+  
+  <!-- Title -->
+  <title>Start Your Assessment - Celestral</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/assessment.css">
+</head>
+<body>
+  
+  <!-- Skip to main content for accessibility -->
+  <a href="#main-content" class="skip-to-main">Skip to main content</a>
+  
+  <!-- ========================================
+       NAVIGATION
+       ======================================== -->
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="navbar__container">
+      <!-- Logo -->
+      <a href="index.html" class="navbar__logo" aria-label="Celestral Home">
+        <span class="navbar__logo-text">Cele</span><span class="navbar__logo-accent">stral</span>
+      </a>
+      
+      <!-- Navigation Menu -->
+      <ul class="navbar__menu" id="navbarMenu">
+        <li><a href="index.html" class="navbar__link">Home</a></li>
+        <li><a href="our-mission.html" class="navbar__link">Our Mission</a></li>
+        <li><a href="contact.html" class="navbar__link">Contact Us</a></li>
+      </ul>
+      
+      <!-- Mobile Menu Toggle -->
+      <button class="navbar__toggle" id="navbarToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+      </button>
+    </div>
+  </nav>
+  
+  <!-- ========================================
+       MAIN CONTENT
+       ======================================== -->
+  <main id="main-content">
+    
+    <!-- Assessment Container -->
+    <section class="assessment-section">
+      <div class="container">
+        
+        <!-- Header -->
+        <div class="assessment-header">
+          <h1 class="assessment-title">Start Your <span class="text-primary">Assessment</span></h1>
+          
+          <!-- Progress Indicator -->
+          <div class="progress-container">
+            <div class="progress-bar">
+              <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-steps">
+              <div class="progress-step active" data-step="1">
+                <div class="step-number">1</div>
+                <div class="step-label">Validation</div>
+              </div>
+              <div class="progress-step" data-step="2">
+                <div class="step-number">2</div>
+                <div class="step-label">Questions</div>
+              </div>
+              <div class="progress-step" data-step="3">
+                <div class="step-number">3</div>
+                <div class="step-label">Preferences</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Assessment Form -->
+        <form class="assessment-form" id="assessmentForm">
+          
+          <!-- ========================================
+               SECTION 1: VALIDATION & KYC
+               ======================================== -->
+          <div class="form-section active" id="section1">
+            <div class="section-header">
+              <h2 class="section-title">Validation and KYC</h2>
+              <p class="section-description">
+                All this information is just for verification purposes and won't be shared. 
+                It's all safe and private with us.
+              </p>
+            </div>
+            
+            <div class="form-grid">
+              <!-- Full Name -->
+              <div class="form-group full-width">
+                <label for="fullName" class="form-label">Your Full Name <span class="required">*</span></label>
+                <input 
+                  type="text" 
+                  id="fullName" 
+                  name="fullName" 
+                  class="form-input" 
+                  placeholder="Enter your full name"
+                  required
+                >
+              </div>
+              
+              <!-- Gender -->
+              <div class="form-group">
+                <label class="form-label">Gender <span class="required">*</span></label>
+                <div class="radio-group">
+                  <label class="radio-label">
+                    <input type="radio" name="gender" value="male" required>
+                    <span class="radio-custom"></span>
+                    <span class="radio-text">Male</span>
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" name="gender" value="female" required>
+                    <span class="radio-custom"></span>
+                    <span class="radio-text">Female</span>
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" name="gender" value="other" required>
+                    <span class="radio-custom"></span>
+                    <span class="radio-text">Other</span>
+                  </label>
+                </div>
+              </div>
+              
+              <!-- Age -->
+              <div class="form-group">
+                <label for="age" class="form-label">Age <span class="required">*</span></label>
+                <input 
+                  type="number" 
+                  id="age" 
+                  name="age" 
+                  class="form-input" 
+                  placeholder="Enter your age"
+                  min="18"
+                  max="100"
+                  required
+                >
+              </div>
+              
+              <!-- Height -->
+              <div class="form-group">
+                <label for="height" class="form-label">Height <span class="required">*</span></label>
+                <input 
+                  type="text" 
+                  id="height" 
+                  name="height" 
+                  class="form-input" 
+                  placeholder="e.g., 5'8&quot; or 173cm"
+                  required
+                >
+              </div>
+              
+              <!-- Location -->
+              <div class="form-group">
+                <label for="location" class="form-label">Location <span class="required">*</span></label>
+                <input 
+                  type="text" 
+                  id="location" 
+                  name="location" 
+                  class="form-input" 
+                  placeholder="City, Country"
+                  required
+                >
+              </div>
+              
+              <!-- Email -->
+              <div class="form-group">
+                <label for="email" class="form-label">Email <span class="required">*</span></label>
+                <input 
+                  type="email" 
+                  id="email" 
+                  name="email" 
+                  class="form-input" 
+                  placeholder="your.email@example.com"
+                  required
+                >
+              </div>
+              
+              <!-- Contact Number -->
+              <div class="form-group">
+                <label for="contactNumber" class="form-label">Contact Number (WhatsApp) <span class="required">*</span></label>
+                <input 
+                  type="tel" 
+                  id="contactNumber" 
+                  name="contactNumber" 
+                  class="form-input" 
+                  placeholder="+1 234 567 8900"
+                  required
+                >
+              </div>
+              
+              <!-- Photo Upload -->
+              <div class="form-group full-width">
+                <label for="photo" class="form-label">
+                  Picture of Yourself with Visible Face <span class="required">*</span>
+                </label>
+                <p class="form-hint">Avoiding bots and verification. Add original to avoid your elimination. Max size: 5MB</p>
+                <div class="file-upload-wrapper">
+                  <input 
+                    type="file" 
+                    id="photo" 
+                    name="photo" 
+                    class="file-input" 
+                    accept="image/jpeg,image/png,image/webp"
+                    required
+                  >
+                  <label for="photo" class="file-label">
+                    <span class="file-icon">📷</span>
+                    <span class="file-text">Choose a photo</span>
+                  </label>
+                  <div class="file-preview" id="photoPreview"></div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-actions">
+              <button type="button" class="btn btn-primary btn-large" onclick="nextSection(2)">
+                Next
+              </button>
+            </div>
+          </div>
+          
+          <!-- ========================================
+               SECTION 2: QUESTIONNAIRE
+               ======================================== -->
+          <div class="form-section" id="section2">
+            <div class="section-header">
+              <h2 class="section-title">Questionnaire and Interaction</h2>
+              <p class="section-description">
+                Just a couple cute questions so we can set up everything perfect for you.<br>
+                Please be descriptive.
+              </p>
+            </div>
+            
+            <div class="form-grid">
+              <!-- Question 1 -->
+              <div class="form-group full-width">
+                <label for="q1" class="form-label">
+                  1. Have you ever been on a date? <span class="required">*</span>
+                </label>
+                <p class="form-hint">If yes, how was it? If no, how should it be?</p>
+                <textarea 
+                  id="q1" 
+                  name="question1" 
+                  class="form-textarea" 
+                  rows="4"
+                  placeholder="Share your thoughts..."
+                  required
+                ></textarea>
+              </div>
+              
+              <!-- Question 2 -->
+              <div class="form-group full-width">
+                <label for="q2" class="form-label">
+                  2. What was the best gift you ever got? <span class="required">*</span>
+                </label>
+                <p class="form-hint">By whom, what was it, and how did that make you feel?</p>
+                <textarea 
+                  id="q2" 
+                  name="question2" 
+                  class="form-textarea" 
+                  rows="4"
+                  placeholder="Share your thoughts..."
+                  required
+                ></textarea>
+              </div>
+              
+              <!-- Question 3 -->
+              <div class="form-group full-width">
+                <label for="q3" class="form-label">
+                  3. Tell me about the best day of your life? <span class="required">*</span>
+                </label>
+                <p class="form-hint">What happened that made your day so special?</p>
+                <textarea 
+                  id="q3" 
+                  name="question3" 
+                  class="form-textarea" 
+                  rows="4"
+                  placeholder="Share your thoughts..."
+                  required
+                ></textarea>
+              </div>
+              
+              <!-- Question 4 -->
+              <div class="form-group full-width">
+                <label for="q4" class="form-label">
+                  4. What's the most heart-warming thing someone can do for you to make you smile and happy? <span class="required">*</span>
+                </label>
+                <p class="form-hint">You can be descriptive here</p>
+                <textarea 
+                  id="q4" 
+                  name="question4" 
+                  class="form-textarea" 
+                  rows="4"
+                  placeholder="Share your thoughts..."
+                  required
+                ></textarea>
+              </div>
+              
+              <!-- Question 5 -->
+              <div class="form-group full-width">
+                <label for="q5" class="form-label">
+                  5. You are an absolute angel and princess/prince, what can be done to make you feel that? <span class="required">*</span>
+                </label>
+                <textarea 
+                  id="q5" 
+                  name="question5" 
+                  class="form-textarea" 
+                  rows="4"
+                  placeholder="Share your thoughts..."
+                  required
+                ></textarea>
+              </div>
+              
+              <!-- Question 6 -->
+              <div class="form-group full-width">
+                <label for="q6" class="form-label">
+                  6. What's the best way you ever thought someone could get treated? <span class="required">*</span>
+                </label>
+                <p class="form-hint">Please spill your tantrums</p>
+                <textarea 
+                  id="q6" 
+                  name="question6" 
+                  class="form-textarea" 
+                  rows="4"
+                  placeholder="Share your thoughts..."
+                  required
+                ></textarea>
+              </div>
+              
+              <!-- Question 7 -->
+              <div class="form-group full-width">
+                <label for="q7" class="form-label">
+                  7. What are the most interesting things you do to pass or kill your time? <span class="required">*</span>
+                </label>
+                <p class="form-hint">I don't judge, I am worse</p>
+                <textarea 
+                  id="q7" 
+                  name="question7" 
+                  class="form-textarea" 
+                  rows="4"
+                  placeholder="Share your thoughts..."
+                  required
+                ></textarea>
+              </div>
+              
+              <!-- Question 8 -->
+              <div class="form-group full-width">
+                <label for="q8" class="form-label">
+                  8. If you wanna show that you are the craziest person in the room, what will you do to prove that? <span class="required">*</span>
+                </label>
+                <p class="form-hint">I already told you that I don't judge</p>
+                <textarea 
+                  id="q8" 
+                  name="question8" 
+                  class="form-textarea" 
+                  rows="4"
+                  placeholder="Share your thoughts..."
+                  required
+                ></textarea>
+              </div>
+            </div>
+            
+            <div class="form-actions">
+              <button type="button" class="btn btn-secondary btn-large" onclick="previousSection(1)">
+                Previous
+              </button>
+              <button type="button" class="btn btn-primary btn-large" onclick="nextSection(3)">
+                Next
+              </button>
+            </div>
+          </div>
+          
+          <!-- ========================================
+               SECTION 3: PREFERENCES
+               ======================================== -->
+          <div class="form-section" id="section3">
+            <div class="section-header">
+              <h2 class="section-title">Let's Find the Lucky One for You</h2>
+              <p class="section-description">Add your preferences</p>
+            </div>
+            
+            <div class="form-grid">
+              <!-- Date Code Name -->
+              <div class="form-group full-width">
+                <label for="dateCodeName" class="form-label">
+                  His/Her Code Name <span class="required">*</span>
+                </label>
+                <p class="form-hint">What will you like to call your date when you meet?</p>
+                <input 
+                  type="text" 
+                  id="dateCodeName" 
+                  name="dateCodeName" 
+                  class="form-input" 
+                  placeholder="e.g., Mystery Match, Dream Date"
+                  required
+                >
+              </div>
+              
+              <!-- Preferred Gender -->
+              <div class="form-group full-width">
+                <label class="form-label">Preferred Gender <span class="required">*</span></label>
+                <div class="radio-group">
+                  <label class="radio-label">
+                    <input type="radio" name="preferredGender" value="male" required>
+                    <span class="radio-custom"></span>
+                    <span class="radio-text">Male</span>
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" name="preferredGender" value="female" required>
+                    <span class="radio-custom"></span>
+                    <span class="radio-text">Female</span>
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" name="preferredGender" value="other" required>
+                    <span class="radio-custom"></span>
+                    <span class="radio-text">Other</span>
+                  </label>
+                </div>
+                <input 
+                  type="text" 
+                  id="preferredGenderOther" 
+                  name="preferredGenderOther" 
+                  class="form-input" 
+                  placeholder="Please specify"
+                  style="display: none; margin-top: 10px;"
+                >
+              </div>
+              
+              <!-- Preferred Height Range -->
+              <div class="form-group full-width">
+                <label class="form-label">Preferred Height Range <span class="required">*</span></label>
+                <div class="range-inputs">
+                  <input 
+                    type="text" 
+                    id="preferredHeightMin" 
+                    name="preferredHeightMin" 
+                    class="form-input" 
+                    placeholder="Min (e.g., 5'5&quot;)"
+                    required
+                  >
+                  <span class="range-separator">to</span>
+                  <input 
+                    type="text" 
+                    id="preferredHeightMax" 
+                    name="preferredHeightMax" 
+                    class="form-input" 
+                    placeholder="Max (e.g., 6'2&quot;)"
+                    required
+                  >
+                </div>
+              </div>
+              
+              <!-- Preferred Age Range -->
+              <div class="form-group full-width">
+                <label class="form-label">Preferred Age Range <span class="required">*</span></label>
+                <div class="range-inputs">
+                  <input 
+                    type="number" 
+                    id="preferredAgeMin" 
+                    name="preferredAgeMin" 
+                    class="form-input" 
+                    placeholder="Min age"
+                    min="18"
+                    max="100"
+                    required
+                  >
+                  <span class="range-separator">to</span>
+                  <input 
+                    type="number" 
+                    id="preferredAgeMax" 
+                    name="preferredAgeMax" 
+                    class="form-input" 
+                    placeholder="Max age"
+                    min="18"
+                    max="100"
+                    required
+                  >
+                </div>
+              </div>
+              
+              <!-- Preferred Date Range -->
+              <div class="form-group full-width">
+                <label class="form-label">Preferred Date Range <span class="required">*</span></label>
+                <div class="range-inputs">
+                  <input 
+                    type="date" 
+                    id="preferredDateStart" 
+                    name="preferredDateStart" 
+                    class="form-input" 
+                    required
+                  >
+                  <span class="range-separator">to</span>
+                  <input 
+                    type="date" 
+                    id="preferredDateEnd" 
+                    name="preferredDateEnd" 
+                    class="form-input" 
+                    required
+                  >
+                </div>
+              </div>
+              
+              <!-- Preferred Time Range -->
+              <div class="form-group full-width">
+                <label class="form-label">Preferred Time Range <span class="required">*</span></label>
+                <div class="range-inputs">
+                  <input 
+                    type="time" 
+                    id="preferredTimeStart" 
+                    name="preferredTimeStart" 
+                    class="form-input" 
+                    required
+                  >
+                  <span class="range-separator">to</span>
+                  <input 
+                    type="time" 
+                    id="preferredTimeEnd" 
+                    name="preferredTimeEnd" 
+                    class="form-input" 
+                    required
+                  >
+                </div>
+              </div>
+              
+              <!-- Expectations -->
+              <div class="form-group full-width">
+                <label for="expectations" class="form-label">
+                  Your Expectations or Demands <span class="required">*</span>
+                </label>
+                <p class="form-hint">Don't be ashamed</p>
+                <textarea 
+                  id="expectations" 
+                  name="expectations" 
+                  class="form-textarea" 
+                  rows="6"
+                  placeholder="Share your expectations..."
+                  required
+                ></textarea>
+              </div>
+            </div>
+            
+            <div class="form-actions">
+              <button type="button" class="btn btn-secondary btn-large" onclick="previousSection(2)">
+                Previous
+              </button>
+              <button type="submit" class="btn btn-primary btn-large" id="submitBtn">
+                Initiate It
+              </button>
+            </div>
+          </div>
+          
+          <!-- ========================================
+               SUCCESS MESSAGE
+               ======================================== -->
+          <div class="form-section" id="successSection" style="display: none;">
+            <div class="success-container">
+              <div class="success-icon">✨</div>
+              <h2 class="success-title">Thanks for Your Assessment!</h2>
+              <p class="success-message">
+                You will be contacted through email and WhatsApp for your date.
+              </p>
+              <p class="success-submessage">
+                Stay excited and curious.
+              </p>
+              <a href="index.html" class="btn btn-primary btn-large">
+                Back to Home
+              </a>
+            </div>
+          </div>
+          
+        </form>
+        
+      </div>
+    </section>
+    
+  </main>
+  
+  <!-- JavaScript Files -->
+  <script src="js/main.js" type="module"></script>
+  <script src="js/assessment.js"></script>
+  
+</body>
+</html>

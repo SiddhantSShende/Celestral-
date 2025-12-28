@@ -1,0 +1,267 @@
+/**
+ * Glassmorphism & Special Effects
+ * Water glass effects and cursive typography for "Love is Mystery"
+ */
+
+/* ========================================
+   CURSIVE FONT IMPORT
+   ======================================== */
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Parisienne&display=swap');
+
+/* ========================================
+   GLASS CARD (Glassmorphism)
+   ======================================== */
+
+.glass-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: var(--radius-xl);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: var(--spacing-3xl);
+    overflow: hidden;
+    box-shadow:
+        0 8px 32px 0 rgba(0, 0, 0, 0.37),
+        inset 0 0 20px rgba(247, 6, 112, 0.1);
+    transition: all var(--transition-slow);
+}
+
+.glass-card:hover {
+    transform: translateY(-8px);
+    box-shadow:
+        0 16px 48px 0 rgba(0, 0, 0, 0.5),
+        inset 0 0 30px rgba(247, 6, 112, 0.2),
+        var(--shadow-glow-pink);
+    border-color: rgba(247, 6, 112, 0.3);
+}
+
+.glass-card__content {
+    position: relative;
+    z-index: 2;
+}
+
+.glass-card__title {
+    font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+}
+
+.glass-card__description {
+    font-size: var(--font-size-h4);
+    line-height: var(--line-height-relaxed);
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ========================================
+   WATER GLASS EFFECT
+   ======================================== */
+
+.water-effect {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: linear-gradient(180deg,
+            rgba(247, 6, 112, 0) 0%,
+            rgba(247, 6, 112, 0.1) 50%,
+            rgba(247, 6, 112, 0.2) 100%);
+    z-index: 0;
+    animation: waterWave 6s ease-in-out infinite;
+    border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+}
+
+@keyframes waterWave {
+
+    0%,
+    100% {
+        transform: translateY(0) scaleY(1);
+        opacity: 0.3;
+    }
+
+    50% {
+        transform: translateY(-10px) scaleY(1.1);
+        opacity: 0.5;
+    }
+}
+
+/* Glass shine effect */
+.glass-shine {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg,
+            transparent 30%,
+            rgba(255, 255, 255, 0.05) 50%,
+            transparent 70%);
+    z-index: 1;
+    animation: glassShine 8s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes glassShine {
+    0% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+
+    100% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
+}
+
+/* Additional water droplet effects */
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    right: 10%;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle,
+            rgba(247, 6, 112, 0.2) 0%,
+            transparent 70%);
+    border-radius: 50%;
+    filter: blur(20px);
+    animation: float 8s ease-in-out infinite;
+    z-index: 0;
+}
+
+.glass-card::after {
+    content: '';
+    position: absolute;
+    bottom: 30%;
+    left: 15%;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle,
+            rgba(247, 6, 112, 0.15) 0%,
+            transparent 70%);
+    border-radius: 50%;
+    filter: blur(15px);
+    animation: float 6s ease-in-out infinite reverse;
+    z-index: 0;
+}
+
+/* ========================================
+   CURSIVE "LOVE IS MYSTERY" TEXT
+   ======================================== */
+
+
+.cursive-text {
+    font-family: 'Great Vibes', cursive;
+    font-size: 72px;
+    font-weight: 400;
+    color: #ffffff;
+    text-align: center;
+    line-height: 1.2;
+    position: relative;
+    z-index: 2;
+    text-shadow:
+        0 0 20px rgba(255, 255, 255, 0.5),
+        0 0 40px rgba(247, 6, 112, 0.4),
+        0 2px 8px rgba(0, 0, 0, 0.8);
+    animation: cursiveGlow 3s ease-in-out infinite;
+    letter-spacing: 2px;
+}
+
+@keyframes cursiveGlow {
+
+    0%,
+    100% {
+        text-shadow:
+            0 0 20px rgba(255, 255, 255, 0.5),
+            0 0 40px rgba(247, 6, 112, 0.4),
+            0 2px 8px rgba(0, 0, 0, 0.8);
+    }
+
+    50% {
+        text-shadow:
+            0 0 30px rgba(255, 255, 255, 0.8),
+            0 0 60px rgba(247, 6, 112, 0.6),
+            0 2px 8px rgba(0, 0, 0, 0.8);
+    }
+}
+
+/* Alternative cursive font option */
+.cursive-text-alt {
+    font-family: 'Parisienne', cursive;
+}
+
+/* ========================================
+   FROSTED GLASS VARIANTS
+   ======================================== */
+
+.glass-card--pink {
+    background: rgba(247, 6, 112, 0.1);
+    border-color: rgba(247, 6, 112, 0.2);
+}
+
+.glass-card--dark {
+    background: rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
+/* ========================================
+   RESPONSIVE ADJUSTMENTS
+   ======================================== */
+
+@media (max-width: 1024px) {
+    .cursive-text {
+        font-size: 56px;
+    }
+
+    .glass-card {
+        padding: var(--spacing-2xl);
+    }
+
+    .glass-card__description {
+        font-size: var(--font-size-body);
+    }
+}
+
+@media (max-width: 768px) {
+    .cursive-text {
+        font-size: 40px;
+    }
+
+    .glass-card {
+        padding: var(--spacing-xl);
+    }
+
+    .glass-card__title {
+        font-size: var(--font-size-h3);
+    }
+
+    .glass-card__description {
+        font-size: var(--font-size-small);
+    }
+
+    .water-effect {
+        height: 100px;
+    }
+}
+
+/* ========================================
+   INTERACTIVE ENHANCEMENTS
+   ======================================== */
+
+/* Add subtle parallax to water effect on mouse move */
+.glass-card:hover .water-effect {
+    animation-play-state: paused;
+    transform: translateY(-5px) scaleY(1.05);
+}
+
+/* Enhance shine on hover */
+.glass-card:hover .glass-shine {
+    animation-duration: 4s;
+}

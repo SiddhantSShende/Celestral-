@@ -1,0 +1,200 @@
+/**
+ * Our Mission Page Styles
+ * Vertical stacked layout with numbered sections
+ */
+
+/* ========================================
+   MISSION HERO SECTION
+   ======================================== */
+
+.mission-hero {
+    padding: 120px 0 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.mission-hero__title {
+    font-size: clamp(48px, 8vw, 96px);
+    font-weight: var(--font-weight-black);
+    line-height: var(--line-height-tight);
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-text);
+}
+
+.mission-hero__subtitle {
+    font-size: clamp(18px, 3vw, 24px);
+    color: var(--color-text-secondary);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: var(--line-height-relaxed);
+}
+
+/* ========================================
+   MISSION SECTION - VERTICAL STACKED
+   ======================================== */
+
+.mission-section {
+    padding: 60px 0 120px;
+}
+
+.mission-item {
+    position: relative;
+    margin-bottom: 120px;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    padding: 60px 0;
+}
+
+.mission-item:last-child {
+    margin-bottom: 0;
+}
+
+/* Alternating layout */
+.mission-item--reverse {
+    flex-direction: row-reverse;
+}
+
+/* Large number on the side */
+.mission-item__number {
+    font-size: clamp(120px, 15vw, 200px);
+    font-weight: var(--font-weight-black);
+    color: var(--color-primary);
+    line-height: 1;
+    opacity: 0.15;
+    flex-shrink: 0;
+    width: 200px;
+    text-align: center;
+    position: relative;
+}
+
+/* Add glow effect to numbers */
+.mission-item__number::before {
+    content: attr(data-number);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    filter: blur(40px);
+    opacity: 0.3;
+    z-index: -1;
+}
+
+/* Content area */
+.mission-item__content {
+    flex: 1;
+    max-width: 800px;
+}
+
+.mission-item__title {
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+    margin-bottom: var(--spacing-lg);
+    line-height: var(--line-height-tight);
+}
+
+.mission-item__description {
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+    margin: 0;
+}
+
+/* Decorative line between items */
+.mission-item::after {
+    content: '';
+    position: absolute;
+    bottom: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(247, 6, 112, 0.3) 50%,
+            transparent 100%);
+}
+
+.mission-item:last-child::after {
+    display: none;
+}
+
+/* Hover effect */
+.mission-item:hover .mission-item__number {
+    opacity: 0.3;
+    transform: scale(1.05);
+    transition: all 0.5s ease;
+}
+
+.mission-item:hover .mission-item__title {
+    color: var(--color-primary);
+    transition: color 0.3s ease;
+}
+
+/* ========================================
+   RESPONSIVE ADJUSTMENTS
+   ======================================== */
+
+@media (max-width: 1024px) {
+    .mission-item {
+        gap: 40px;
+        margin-bottom: 100px;
+        padding: 40px 0;
+    }
+
+    .mission-item__number {
+        width: 150px;
+        font-size: clamp(100px, 12vw, 150px);
+    }
+}
+
+@media (max-width: 768px) {
+    .mission-hero {
+        padding: 100px 0 60px;
+    }
+
+    .mission-item {
+        flex-direction: column !important;
+        gap: 30px;
+        margin-bottom: 80px;
+        padding: 30px 0;
+        text-align: center;
+    }
+
+    .mission-item__number {
+        width: 100%;
+        font-size: clamp(80px, 20vw, 120px);
+    }
+
+    .mission-item__content {
+        max-width: 100%;
+    }
+
+    .mission-item::after {
+        bottom: -40px;
+        width: 80%;
+    }
+}
+
+@media (max-width: 480px) {
+    .mission-hero {
+        padding: 80px 0 40px;
+    }
+
+    .mission-item {
+        margin-bottom: 60px;
+        padding: 20px 0;
+    }
+
+    .mission-item__number {
+        font-size: 80px;
+    }
+
+    .mission-item::after {
+        bottom: -30px;
+        width: 90%;
+    }
+}

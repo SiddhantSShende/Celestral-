@@ -1,0 +1,205 @@
+/**
+ * Design System Variables
+ * CSS Custom Properties for consistent theming
+ * Based on OCTO SMM design theme adapted for Celestral
+ */
+
+:root {
+    /* ========================================
+     COLOR PALETTE
+     ======================================== */
+
+    /* Primary Colors */
+    --color-primary: #F70670;
+    /* Vibrant hot pink - main brand color */
+    --color-primary-dark: #D10560;
+    /* Darker pink for hover states */
+    --color-primary-light: #FF1A85;
+    /* Lighter pink for accents */
+
+    /* Background Colors */
+    --color-bg: #000000;
+    /* Pure black background */
+    --color-bg-secondary: #0A0A0A;
+    /* Slightly lighter black for depth */
+    --color-bg-tertiary: #1A1A1A;
+    /* Dark gray for subtle sections */
+
+    /* Text Colors */
+    --color-text: #FFFFFF;
+    /* Primary white text */
+    --color-text-secondary: #B3B3B3;
+    /* Gray text for secondary content */
+    --color-text-muted: #666666;
+    /* Muted text for less important info */
+
+    /* Card Colors */
+    --color-card-light: #F1F9F4;
+    /* Off-white for light cards */
+    --color-card-dark: #1A1A1A;
+    /* Dark cards */
+    --color-card-pink: var(--color-primary);
+    /* Pink cards */
+
+    /* ========================================
+     TYPOGRAPHY
+     ======================================== */
+
+    /* Font Families */
+    --font-primary: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-secondary: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+    /* Font Sizes - Desktop */
+    --font-size-hero: 96px;
+    /* Hero headlines */
+    --font-size-h1: 72px;
+    /* Main section headers */
+    --font-size-h2: 48px;
+    /* Sub-section headers */
+    --font-size-h3: 36px;
+    /* Card headers */
+    --font-size-h4: 24px;
+    /* Small headers */
+    --font-size-body: 18px;
+    /* Body text */
+    --font-size-small: 16px;
+    /* Small text */
+    --font-size-tiny: 14px;
+    /* Tiny text */
+
+    /* Font Weights */
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-black: 900;
+
+    /* Line Heights */
+    --line-height-tight: 1.1;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.75;
+
+    /* ========================================
+     SPACING SYSTEM
+     ======================================== */
+
+    --spacing-xs: 8px;
+    --spacing-sm: 16px;
+    --spacing-md: 24px;
+    --spacing-lg: 32px;
+    --spacing-xl: 48px;
+    --spacing-2xl: 64px;
+    --spacing-3xl: 96px;
+    --spacing-4xl: 128px;
+
+    /* Section Spacing */
+    --section-padding-mobile: 60px;
+    --section-padding-tablet: 80px;
+    --section-padding-desktop: 120px;
+
+    /* Container Widths */
+    --container-max-width: 1440px;
+    --container-padding: 24px;
+
+    /* ========================================
+     BORDERS & RADIUS
+     ======================================== */
+
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-xl: 32px;
+    --radius-card: 24px;
+    --radius-button: 999px;
+    /* Pill-shaped buttons */
+
+    /* Border Widths */
+    --border-thin: 1px;
+    --border-medium: 2px;
+    --border-thick: 4px;
+
+    /* ========================================
+     SHADOWS & EFFECTS
+     ======================================== */
+
+    /* Shadows */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --shadow-xl: 0 16px 64px rgba(0, 0, 0, 0.4);
+
+    /* Glow Effects */
+    --shadow-glow-pink: 0 0 40px rgba(247, 6, 112, 0.4);
+    --shadow-glow-pink-strong: 0 0 60px rgba(247, 6, 112, 0.6);
+    --shadow-glow-white: 0 0 30px rgba(255, 255, 255, 0.3);
+
+    /* ========================================
+     TRANSITIONS & ANIMATIONS
+     ======================================== */
+
+    /* Easing Functions */
+    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-out: cubic-bezier(0.0, 0, 0.2, 1);
+    --ease-in: cubic-bezier(0.4, 0, 1, 1);
+    --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    /* Transition Durations */
+    --transition-fast: 150ms;
+    --transition-base: 300ms;
+    --transition-slow: 500ms;
+    --transition-slower: 700ms;
+
+    /* Base Transition */
+    --transition: var(--transition-base) var(--ease-in-out);
+
+    /* ========================================
+     Z-INDEX LAYERS
+     ======================================== */
+
+    --z-base: 1;
+    --z-dropdown: 100;
+    --z-sticky: 200;
+    --z-fixed: 300;
+    --z-modal-backdrop: 400;
+    --z-modal: 500;
+    --z-popover: 600;
+    --z-tooltip: 700;
+
+    /* ========================================
+     BREAKPOINTS (for reference in media queries)
+     ======================================== */
+
+    --breakpoint-mobile: 320px;
+    --breakpoint-tablet: 768px;
+    --breakpoint-desktop: 1024px;
+    --breakpoint-wide: 1440px;
+}
+
+/* ========================================
+   RESPONSIVE FONT SIZES
+   ======================================== */
+
+/* Tablet adjustments */
+@media (max-width: 1024px) {
+    :root {
+        --font-size-hero: 64px;
+        --font-size-h1: 56px;
+        --font-size-h2: 40px;
+        --font-size-h3: 32px;
+        --font-size-h4: 20px;
+        --font-size-body: 16px;
+    }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    :root {
+        --font-size-hero: 48px;
+        --font-size-h1: 40px;
+        --font-size-h2: 32px;
+        --font-size-h3: 24px;
+        --font-size-h4: 18px;
+        --font-size-body: 16px;
+        --container-padding: 16px;
+    }
+}
