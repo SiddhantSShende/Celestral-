@@ -11,9 +11,22 @@ let filteredSubmissions = [];
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', function () {
+    // Ensure AppConfig is loaded
+    if (!window.AppConfig) {
+        console.error('AppConfig not loaded! Make sure config.js is loaded before admin.js');
+        alert('Configuration error. Please refresh the page.');
+        return;
+    }
+
     // Load credentials from config
     AUTHORIZED_EMAIL = window.AppConfig.getAdminEmail();
     ADMIN_PASSWORD = window.AppConfig.getAdminPassword();
+
+    // Debug logging (remove in production)
+    console.log('Admin config loaded:', {
+        email: AUTHORIZED_EMAIL ? '✓' : '✗',
+        password: ADMIN_PASSWORD ? '✓' : '✗'
+    });
 
     checkAuthStatus();
 });
@@ -67,14 +80,25 @@ function handleLogin(event) {
     const email = document.getElementById('adminEmail').value.trim();
     const password = document.getElementById('adminPassword').value;
 
+    // Debug logging
+    console.log('Login attempt:', {
+        email: email,
+        emailLength: email.length,
+        passwordLength: password.length,
+        expectedEmail: window.AppConfig.getAdminEmail(),
+        configExists: !!window.AppConfig
+    });
+
     // Verify credentials using config
-    if (window.AppConfig.verifyCredentials(email, password)) {
+    if (window.AppConfig && window.AppConfig.verifyCredentials(email, password)) {
         // Grant access
+        console.log('✓ Login successful');
         localStorage.setItem('admin_user', email);
         localStorage.setItem('admin_authenticated', 'true');
         showDashboard(email);
     } else {
         // Deny access
+        console.log('✗ Login failed');
         alert('Access Denied. Invalid email or password.');
 
         // Clear password field
@@ -95,14 +119,44 @@ function handleSignOut() {
 }
 
 /**
- * Load submissions from localStorage
+ * Load submissions from Firebase Firestore
  */
-function loadSubmissions() {
-    allSubmissions = JSON.parse(localStorage.getItem('celestral_submissions') || '[]');
-    filteredSubmissions = [...allSubmissions];
+async function loadSubmissions() {
+    try {
+        // Initialize Firebase if not already done
+        if (!window.FirebaseDB.getDB()) {
+            window.FirebaseDB.initialize();
+        }
 
-    updateStats();
-    displaySubmissions();
+        const db = window.FirebaseDB.getDB();
+
+        // Get all submissions from Firestore
+        const snapshot = await db.collection('submissions')
+            .orderBy('submittedAt', 'desc')
+            .get();
+
+        // Convert to array
+        allSubmissions = snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data(),
+            // Convert Firestore timestamp to ISO string
+            submittedAt: doc.data().submittedAt?.toDate?.()?.toISOString() || doc.data().submittedAt
+        }));
+
+        filteredSubmissions = [...allSubmissions];
+
+        console.log(`✅ Loaded ${allSubmissions.length} submissions from Firebase`);
+
+        updateStats();
+        displaySubmissions();
+    } catch (error) {
+        console.error('❌ Error loading submissions:', error);
+        // Fallback to localStorage if Firebase fails
+        allSubmissions = JSON.parse(localStorage.getItem('celestral_submissions') || '[]');
+        filteredSubmissions = [...allSubmissions];
+        updateStats();
+        displaySubmissions();
+    }
 }
 
 /**
