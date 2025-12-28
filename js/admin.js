@@ -123,12 +123,12 @@ function handleSignOut() {
  */
 async function loadSubmissions() {
     try {
-        // Initialize Firebase if not already done
-        if (!window.FirebaseDB.getDB()) {
-            window.FirebaseDB.initialize();
-        }
-
+        // Get Firebase database (already initialized by firebase-config.js)
         const db = window.FirebaseDB.getDB();
+
+        if (!db) {
+            throw new Error('Firebase not initialized');
+        }
 
         // Get all submissions from Firestore
         const snapshot = await db.collection('submissions')
