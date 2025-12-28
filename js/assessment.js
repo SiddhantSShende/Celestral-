@@ -247,9 +247,6 @@ function handlePhotoUpload(event) {
     reader.readAsDataURL(file);
 }
 
-/**
- * Handle form submission
- */
 async function handleSubmit(event) {
     event.preventDefault();
 
@@ -267,40 +264,41 @@ async function handleSubmit(event) {
     submitBtn.textContent = 'Submitting...';
 
     try {
+        // Initialize Firebase if not already done
+        if (!window.FirebaseDB.getDB()) {
+            window.FirebaseDB.initialize();
+        }
+
+        const db = window.FirebaseDB.getDB();
+
         // Get photo file
         const photoInput = document.getElementById('photo');
         const photoFile = photoInput.files[0];
 
-        // For now, we'll store data in localStorage
-        // In production, this would be sent to Firebase
+        // Convert photo to base64
+        let photoData = null;
+        if (photoFile) {
+            photoData = await new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onload = (e) => resolve(e.target.result);
+                reader.readAsDataURL(photoFile);
+            });
+        }
+
+        // Prepare submission data
         const submission = {
             ...formData,
             photoFileName: photoFile ? photoFile.name : null,
             photoFileSize: photoFile ? photoFile.size : null,
-            submittedAt: new Date().toISOString(),
+            photoData: photoData,
+            submittedAt: firebase.firestore.FieldValue.serverTimestamp(),
             status: 'pending'
         };
 
-        // Store in localStorage (temporary solution)
-        const submissions = JSON.parse(localStorage.getItem('celestral_submissions') || '[]');
-        submissions.push(submission);
-        localStorage.setItem('celestral_submissions', JSON.stringify(submissions));
+        // Save to Firestore
+        await db.collection('submissions').add(submission);
 
-        // Also store photo as base64 (for demo purposes only)
-        if (photoFile) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                submission.photoData = e.target.result;
-                // Update stored submission with photo
-                const updatedSubmissions = JSON.parse(localStorage.getItem('celestral_submissions') || '[]');
-                updatedSubmissions[updatedSubmissions.length - 1] = submission;
-                localStorage.setItem('celestral_submissions', JSON.stringify(updatedSubmissions));
-            };
-            reader.readAsDataURL(photoFile);
-        }
-
-        // Simulate API delay
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        console.log('✅ Submission saved to Firebase successfully!');
 
         // Hide form sections
         document.querySelectorAll('.form-section').forEach(section => {
@@ -314,7 +312,7 @@ async function handleSubmit(event) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
 
     } catch (error) {
-        console.error('Submission error:', error);
+        console.error('❌ Submission error:', error);
         alert('There was an error submitting your assessment. Please try again.');
         submitBtn.disabled = false;
         submitBtn.textContent = 'Initiate It';
