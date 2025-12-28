@@ -264,12 +264,12 @@ async function handleSubmit(event) {
     submitBtn.textContent = 'Submitting...';
 
     try {
-        // Initialize Firebase if not already done
-        if (!window.FirebaseDB.getDB()) {
-            window.FirebaseDB.initialize();
-        }
-
+        // Get Firebase database (already initialized by firebase-config.js)
         const db = window.FirebaseDB.getDB();
+
+        if (!db) {
+            throw new Error('Firebase not initialized. Please refresh the page.');
+        }
 
         // Get photo file
         const photoInput = document.getElementById('photo');
