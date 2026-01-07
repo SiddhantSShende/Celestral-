@@ -98,6 +98,7 @@
           <div class="form-section active" id="section1">
             <div class="section-header">
               <h2 class="section-title">Validation and KYC</h2>
+              <h1 class="section-title">You can't <span class="text-primary">Catfish</span></h1>
               <p class="section-description">
                 All this information is just for verification purposes and won't be shared. 
                 It's all safe and private with us.
@@ -170,13 +171,13 @@
               
               <!-- Location -->
               <div class="form-group">
-                <label for="location" class="form-label">Location <span class="required">*</span></label>
+                <label for="location" class="form-label">Location (Your Date will be allocated here)<span class="required">*</span></label>
                 <input 
                   type="text" 
                   id="location" 
                   name="location" 
                   class="form-input" 
-                  placeholder="City, Country"
+                  placeholder="e.g., 123 Main St, City, Country"
                   required
                 >
               </div>
@@ -541,6 +542,49 @@
                 </div>
               </div>
               
+              <!-- Preferred Weekdays -->
+              <div class="form-group full-width">
+                <label class="form-label">Preferred Weekdays <span class="required">*</span></label>
+                <p class="form-hint">Select one or more days that work best for you</p>
+                <div class="checkbox-group">
+                  <label class="checkbox-label">
+                    <input type="checkbox" name="preferredWeekdays" value="Monday">
+                    <span class="checkbox-custom"></span>
+                    <span class="checkbox-text">Monday</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" name="preferredWeekdays" value="Tuesday">
+                    <span class="checkbox-custom"></span>
+                    <span class="checkbox-text">Tuesday</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" name="preferredWeekdays" value="Wednesday">
+                    <span class="checkbox-custom"></span>
+                    <span class="checkbox-text">Wednesday</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" name="preferredWeekdays" value="Thursday">
+                    <span class="checkbox-custom"></span>
+                    <span class="checkbox-text">Thursday</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" name="preferredWeekdays" value="Friday">
+                    <span class="checkbox-custom"></span>
+                    <span class="checkbox-text">Friday</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" name="preferredWeekdays" value="Saturday">
+                    <span class="checkbox-custom"></span>
+                    <span class="checkbox-text">Saturday</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" name="preferredWeekdays" value="Sunday">
+                    <span class="checkbox-custom"></span>
+                    <span class="checkbox-text">Sunday</span>
+                  </label>
+                </div>
+              </div>
+              
               <!-- Expectations -->
               <div class="form-group full-width">
                 <label for="expectations" class="form-label">
@@ -573,7 +617,6 @@
                ======================================== -->
           <div class="form-section" id="successSection" style="display: none;">
             <div class="success-container">
-              <div class="success-icon">✨</div>
               <h2 class="success-title">Thanks for Your Assessment!</h2>
               <p class="success-message">
                 You will be contacted through email and WhatsApp for your date.

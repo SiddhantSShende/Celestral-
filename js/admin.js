@@ -1,122 +1,19 @@
 /**
  * Admin Portal Logic
- * Google authentication with password protection and submission management
+ * Clerk authentication with submission management
  */
 
-// Wait for config to load
-let AUTHORIZED_EMAIL;
-let ADMIN_PASSWORD;
 let allSubmissions = [];
 let filteredSubmissions = [];
 
-// Initialize on page load
+// Note: Authentication is handled by Clerk (see admin.html)
+// This file only handles the dashboard functionality after successful authentication
+
+// Initialize dashboard when DOM is loaded
 document.addEventListener('DOMContentLoaded', function () {
-    // Ensure AppConfig is loaded
-    if (!window.AppConfig) {
-        console.error('AppConfig not loaded! Make sure config.js is loaded before admin.js');
-        alert('Configuration error. Please refresh the page.');
-        return;
-    }
-
-    // Load credentials from config
-    AUTHORIZED_EMAIL = window.AppConfig.getAdminEmail();
-    ADMIN_PASSWORD = window.AppConfig.getAdminPassword();
-
-    // Debug logging (remove in production)
-    console.log('Admin config loaded:', {
-        email: AUTHORIZED_EMAIL ? '✓' : '✗',
-        password: ADMIN_PASSWORD ? '✓' : '✗'
-    });
-
-    checkAuthStatus();
+    console.log('Admin dashboard initialized');
+    // Clerk handles authentication - loadSubmissions will be called from admin.html after auth
 });
-
-/**
- * Check authentication status
- */
-function checkAuthStatus() {
-    const currentUser = localStorage.getItem('admin_user');
-    const isAuthenticated = localStorage.getItem('admin_authenticated');
-
-    // Verify against config email
-    const authorizedEmail = window.AppConfig.getAdminEmail();
-
-    if (currentUser && currentUser === authorizedEmail && isAuthenticated === 'true') {
-        showDashboard(currentUser);
-    } else {
-        // Clear any stale auth data
-        localStorage.removeItem('admin_user');
-        localStorage.removeItem('admin_authenticated');
-        showLoginScreen();
-    }
-}
-
-/**
- * Show login screen
- */
-function showLoginScreen() {
-    document.getElementById('loginScreen').style.display = 'flex';
-    document.getElementById('adminDashboard').style.display = 'none';
-}
-
-/**
- * Show dashboard
- */
-function showDashboard(email) {
-    document.getElementById('loginScreen').style.display = 'none';
-    document.getElementById('adminDashboard').style.display = 'block';
-    document.getElementById('userEmail').textContent = email;
-
-    loadSubmissions();
-}
-
-/**
- * Handle Login Form Submission
- */
-function handleLogin(event) {
-    event.preventDefault();
-
-    // Get form values
-    const email = document.getElementById('adminEmail').value.trim();
-    const password = document.getElementById('adminPassword').value;
-
-    // Debug logging
-    console.log('Login attempt:', {
-        email: email,
-        emailLength: email.length,
-        passwordLength: password.length,
-        expectedEmail: window.AppConfig.getAdminEmail(),
-        configExists: !!window.AppConfig
-    });
-
-    // Verify credentials using config
-    if (window.AppConfig && window.AppConfig.verifyCredentials(email, password)) {
-        // Grant access
-        console.log('✓ Login successful');
-        localStorage.setItem('admin_user', email);
-        localStorage.setItem('admin_authenticated', 'true');
-        showDashboard(email);
-    } else {
-        // Deny access
-        console.log('✗ Login failed');
-        alert('Access Denied. Invalid email or password.');
-
-        // Clear password field
-        document.getElementById('adminPassword').value = '';
-        document.getElementById('adminPassword').focus();
-    }
-}
-
-/**
- * Handle Sign Out
- */
-function handleSignOut() {
-    if (confirm('Are you sure you want to sign out?')) {
-        localStorage.removeItem('admin_user');
-        localStorage.removeItem('admin_authenticated');
-        showLoginScreen();
-    }
-}
 
 /**
  * Load submissions from Firebase Firestore
@@ -429,6 +326,11 @@ function viewSubmission(index) {
             <div class="modal-field">
                 <div class="modal-field-label">Preferred Time Range</div>
                 <div class="modal-field-value">${submission.preferredTimeStart || 'N/A'} to ${submission.preferredTimeEnd || 'N/A'}</div>
+            </div>
+            
+            <div class="modal-field">
+                <div class="modal-field-label">Preferred Weekdays</div>
+                <div class="modal-field-value">${submission.preferredWeekdays && Array.isArray(submission.preferredWeekdays) ? submission.preferredWeekdays.join(', ') : 'N/A'}</div>
             </div>
             
             <div class="modal-field">

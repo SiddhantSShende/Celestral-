@@ -221,6 +221,32 @@
     transition: all 0.3s ease;
 }
 
+/* Make calendar and clock icons white for date/time inputs */
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(1) brightness(2);
+}
+
+input[type="date"]::-webkit-input-placeholder,
+input[type="time"]::-webkit-input-placeholder {
+    color: var(--color-text-muted);
+}
+
+input[type="date"]::-moz-placeholder,
+input[type="time"]::-moz-placeholder {
+    color: var(--color-text-muted);
+}
+
+input[type="date"]:-ms-input-placeholder,
+input[type="time"]:-ms-input-placeholder {
+    color: var(--color-text-muted);
+}
+
+input[type="date"]::placeholder,
+input[type="time"]::placeholder {
+    color: var(--color-text-muted);
+}
+
 .form-input:focus,
 .form-textarea:focus {
     outline: none;
@@ -313,6 +339,106 @@
 
 .range-inputs .form-input {
     flex: 1;
+}
+
+/* ========================================
+   CHECKBOX GROUP (Weekdays)
+   ======================================== */
+
+.checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.checkbox-label:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(247, 6, 112, 0.3);
+    transform: translateY(-2px);
+}
+
+.checkbox-label input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkbox-custom {
+    width: 24px;
+    height: 24px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 6px;
+    position: relative;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.checkbox-label input[type="checkbox"]:checked ~ .checkbox-custom {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 12px rgba(247, 6, 112, 0.5);
+}
+
+.checkbox-label input[type="checkbox"]:checked ~ .checkbox-custom::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: var(--font-weight-bold);
+    line-height: 1;
+}
+
+.checkbox-text {
+    font-size: var(--font-size-body);
+    color: var(--color-text);
+    font-weight: var(--font-weight-medium);
+    transition: color 0.3s ease;
+}
+
+.checkbox-label input[type="checkbox"]:checked ~ .checkbox-text {
+    color: var(--color-primary);
+    font-weight: var(--font-weight-semibold);
+}
+
+.checkbox-label input[type="checkbox"]:checked {
+    background: rgba(247, 6, 112, 0.1);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 20px rgba(247, 6, 112, 0.2);
+}
+
+/* Responsive adjustments for checkboxes */
+@media (max-width: 768px) {
+    .checkbox-group {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: var(--spacing-sm);
+    }
+    
+    .checkbox-label {
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+    
+    .checkbox-text {
+        font-size: var(--font-size-small);
+    }
 }
 
 /* ========================================

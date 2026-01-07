@@ -21,6 +21,15 @@
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/animations.css">
   <link rel="stylesheet" href="css/admin.css">
+  
+  <!-- Clerk SDK -->
+  <script 
+    async 
+    crossorigin="anonymous" 
+    data-clerk-publishable-key="pk_test_YWJsZS1nZWNrby0xLmNsZXJrLmFjY291bnRzLmRldiQ" 
+    src="https://challenged-marten-5.clerk.accounts.dev/npm/@clerk/clerk-js@latest/dist/clerk.browser.js" 
+    type="text/javascript">
+  </script>
 </head>
 <body>
   
@@ -40,40 +49,11 @@
         <div class="login-icon">🔐</div>
         <h2 class="login-heading">Admin Login</h2>
         <p class="login-description">
-          Enter your credentials to access the admin portal
+          Sign in with Clerk to access the admin portal
         </p>
         
-        <form class="login-form" id="loginForm" onsubmit="handleLogin(event)">
-          <div class="form-group">
-            <label for="adminEmail" class="form-label">Email Address</label>
-            <input 
-              type="email" 
-              id="adminEmail" 
-              name="email" 
-              class="form-input" 
-              placeholder="Enter your email"
-              required
-              autocomplete="email"
-            >
-          </div>
-          
-          <div class="form-group">
-            <label for="adminPassword" class="form-label">Password</label>
-            <input 
-              type="password" 
-              id="adminPassword" 
-              name="password" 
-              class="form-input" 
-              placeholder="Enter your password"
-              required
-              autocomplete="current-password"
-            >
-          </div>
-          
-          <button type="submit" class="btn-login">
-            Sign In
-          </button>
-        </form>
+        <!-- Clerk Sign In Component will be mounted here -->
+        <div id="clerk-signin"></div>
         
         <p class="login-note">
           Access restricted to authorized administrators only
@@ -202,6 +182,125 @@
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  
+  <!-- Clerk Initialization -->
+  <script>
+    // Authorized admin emails
+    const AUTHORIZED_ADMINS = [
+      'sidaeivarc@gmail.com'
+      // Add more authorized emails here
+    ];
+    
+    window.addEventListener('load', async () => {
+      try {
+        // Wait for Clerk to be available
+        if (!window.Clerk) {
+          console.error('Clerk SDK not loaded from CDN');
+          throw new Error('Clerk SDK not loaded');
+        }
+        
+        // Clerk is loaded via the script tag with data-clerk-publishable-key
+        // It will auto-initialize
+        await window.Clerk.load();
+        
+        const loginScreen = document.getElementById('loginScreen');
+        const adminDashboard = document.getElementById('adminDashboard');
+        const userEmailDisplay = document.getElementById('userEmail');
+        
+        // Function to check if user is authorized
+        function isAuthorizedAdmin(email) {
+          return AUTHORIZED_ADMINS.includes(email.toLowerCase());
+        }
+        
+        // Function to show dashboard
+        function showDashboard() {
+          const userEmail = window.Clerk.user.emailAddresses[0].emailAddress;
+          
+          // Check if user is authorized
+          if (!isAuthorizedAdmin(userEmail)) {
+            alert('Access Denied: You are not authorized to access this admin portal.');
+            window.Clerk.signOut();
+            showLogin();
+            return;
+          }
+          
+          loginScreen.style.display = 'none';
+          adminDashboard.style.display = 'block';
+          userEmailDisplay.textContent = userEmail;
+          
+          // Load admin data
+          if (typeof loadSubmissions === 'function') {
+            loadSubmissions();
+          }
+        }
+        
+        // Function to show login
+        function showLogin() {
+          loginScreen.style.display = 'flex';
+          adminDashboard.style.display = 'none';
+        }
+        
+        if (window.Clerk.user) {
+          // User is authenticated, check authorization and show dashboard
+          showDashboard();
+        } else {
+          // User not authenticated, show Clerk sign-in
+          showLogin();
+          
+          // Mount Clerk sign-in component (sign-in only, no sign-up)
+          const clerkSigninDiv = document.getElementById('clerk-signin');
+          if (clerkSigninDiv) {
+            window.Clerk.mountSignIn(clerkSigninDiv, {
+              appearance: {
+                elements: {
+                  rootBox: 'w-full',
+                  card: 'w-full'
+                }
+              },
+              // Prevent redirect after sign in
+              afterSignInUrl: window.location.href,
+              redirectUrl: window.location.href,
+              // Hide sign-up link
+              signUpUrl: null
+            });
+          }
+        }
+        
+        // Listen for session changes
+        window.Clerk.addListener((session) => {
+          if (session.user) {
+            // User signed in, check authorization and show dashboard
+            showDashboard();
+          } else {
+            // User signed out, show login
+            showLogin();
+          }
+        });
+        
+        // Override handleSignOut to use Clerk
+        window.handleSignOut = async () => {
+          await window.Clerk.signOut();
+          showLogin();
+        };
+        
+      } catch (error) {
+        console.error('Clerk initialization error:', error);
+        const clerkDiv = document.getElementById('clerk-signin');
+        if (clerkDiv) {
+          clerkDiv.innerHTML = `
+            <div style="color: #ff4444; padding: 20px; text-align: center;">
+              <p>Failed to load Clerk authentication.</p>
+              <p style="font-size: 14px; margin-top: 10px;">Error: ${error.message}</p>
+              <p style="font-size: 12px; margin-top: 10px;">Please check your Clerk publishable key.</p>
+              <button onclick="location.reload()" style="margin-top: 15px; padding: 10px 20px; background: #646cff; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                Retry
+              </button>
+            </div>
+          `;
+        }
+      }
+    });
+  </script>
   
   <!-- JavaScript Files -->
   <script src="js/firebase-config.js"></script>

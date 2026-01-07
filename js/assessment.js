@@ -177,6 +177,24 @@ function validateSection(sectionNum) {
         }
     });
 
+    // Check checkbox groups (for weekday preferences)
+    const checkboxGroups = section.querySelectorAll('.checkbox-group');
+    checkboxGroups.forEach(group => {
+        const checkboxes = group.querySelectorAll('input[type="checkbox"]');
+        const isAnyChecked = Array.from(checkboxes).some(cb => cb.checked);
+        
+        if (!isAnyChecked && checkboxes.length > 0) {
+            isValid = false;
+            const formGroup = group.closest('.form-group');
+            if (formGroup) {
+                formGroup.style.borderLeft = '3px solid var(--color-primary)';
+                setTimeout(() => {
+                    formGroup.style.borderLeft = '';
+                }, 2000);
+            }
+        }
+    });
+
     if (!isValid) {
         alert('Please fill in all required fields before proceeding.');
     }
@@ -195,6 +213,14 @@ function saveCurrentSectionData() {
         if (input.type === 'radio') {
             if (input.checked) {
                 formData[input.name] = input.value;
+            }
+        } else if (input.type === 'checkbox') {
+            // Handle checkbox groups (like weekday preferences)
+            if (!formData[input.name]) {
+                formData[input.name] = [];
+            }
+            if (input.checked) {
+                formData[input.name].push(input.value);
             }
         } else if (input.type === 'file') {
             // File will be handled separately during submission
