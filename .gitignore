@@ -41,3 +41,8 @@ build/
 *.tmp
 *.temp
 .tmp/
+
+# Admin portal (not for public deployment)
+admin.html
+css/admin.css
+js/admin.js
